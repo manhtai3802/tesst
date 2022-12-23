@@ -3,17 +3,18 @@ import axios from "axios";
 import { useState } from "react";
 function FormAdd({ getApi }) {
   const [form] = Form.useForm();
-  const [modal, setModal] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = () => {
-    setModal(!modal);
+  const showModal = () => {
+    setIsModalOpen(true);
   };
 
-  if (modal) {
-    document.body.classList.add("active-modal");
-  } else {
-    document.body.classList.remove("active-modal");
-  }
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   const onFinish = async (values) => {
     const response = await axios({
@@ -30,13 +31,16 @@ function FormAdd({ getApi }) {
 
   return (
     <>
-      <button onClick={toggleModal} className="btn-modal">
-        Open
-      </button>
-
-      {modal && (
-        <div className="modal">
-          <div onClick={toggleModal} className="overlay"></div>
+      <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button>
+      <Modal
+        title="Basic Modal"
+        open={isModalOpen}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <div>
           <div className="modal-content">
             <Form
               name="basic"
@@ -136,7 +140,7 @@ function FormAdd({ getApi }) {
             </Form>
           </div>
         </div>
-      )}
+      </Modal>
     </>
   );
 }
