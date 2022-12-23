@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormAdd from "../components/AddFormUser";
+import { router } from "../router/router";
+import UpdateStudent from "./UpdateStudent";
 
 const ManagementStudent = () => {
   const [user, setUser] = useState([]);
@@ -112,8 +114,9 @@ const ManagementStudent = () => {
     setUser(user.filter((p) => p.id !== user.id));
     getApi();
   };
+
   const handleUpdate = (id) => {
-    navigate("/success");
+    navigate(`user/${id}`);
   };
   return (
     <>

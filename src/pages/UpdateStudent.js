@@ -13,7 +13,7 @@ const tailLayout = {
     span: 16,
   },
 };
-const UpdateStudent = () => {
+const UpdateStudent = ({ id }) => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
