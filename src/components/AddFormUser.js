@@ -1,10 +1,9 @@
+import { Button, Form, Input, Modal } from "antd";
+import axios from "axios";
 import { useState } from "react";
-import { Button, Checkbox, Form, Input, DatePicker } from "antd";
-
-function FormAdd({ data, setData }) {
+function FormAdd({ getApi }) {
   const [form] = Form.useForm();
   const [modal, setModal] = useState(false);
-  const [newUser, setNewtUser] = useState([]);
 
   const toggleModal = () => {
     setModal(!modal);
@@ -16,9 +15,15 @@ function FormAdd({ data, setData }) {
     document.body.classList.remove("active-modal");
   }
 
-  const onFinish = (values) => {
-    setData([values, ...data]);
+  const onFinish = async (values) => {
+    const response = await axios({
+      method: "post",
+      url: "http://prod.example.fafu.com.vn/employee",
+      data: values,
+    });
+    getApi();
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };

@@ -27,25 +27,71 @@ const EditFormUser = () => {
   return (
     <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
       <Form.Item
-        name="note"
-        label="Note"
+        label="User"
+        name="username"
         rules={[
           {
             required: true,
+            message: "Please input your username!",
           },
         ]}
       >
         <Input />
       </Form.Item>
+
       <Form.Item
-        name="gender"
-        label="Gender"
+        label="First Name"
+        name="firstName"
         rules={[
           {
             required: true,
+            message: "Please input your first name!",
           },
         ]}
       >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Last Name"
+        name="lastName"
+        rules={[
+          {
+            required: true,
+            message: "Please input your last name!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="ID"
+        name="id"
+        rules={[
+          {
+            required: true,
+            message: "Please input your last name!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Phone"
+        name="phone"
+        rules={[
+          {
+            required: true,
+            message: "Please input your phone!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item label="Address" name="address">
         <Input />
       </Form.Item>
 
