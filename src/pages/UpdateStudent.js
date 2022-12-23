@@ -1,4 +1,3 @@
-import React from "react";
 import { Button, Form, Input } from "antd";
 const layout = {
   labelCol: {
@@ -14,7 +13,7 @@ const tailLayout = {
     span: 16,
   },
 };
-const EditFormUser = () => {
+const UpdateStudent = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -106,4 +105,4 @@ const EditFormUser = () => {
     </Form>
   );
 };
-export default EditFormUser;
+export default UpdateStudent;
