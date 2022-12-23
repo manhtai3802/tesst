@@ -8,7 +8,7 @@ export const router = createBrowserRouter([
     element: <ManagementStudent />,
     children: [
       {
-        path: "user/id",
+        path: "user/:id",
         element: <UpdateStudent />,
       },
     ],

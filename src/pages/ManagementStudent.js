@@ -4,8 +4,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FormAdd from "../components/AddFormUser";
-import { router } from "../router/router";
-import UpdateStudent from "./UpdateStudent";
 
 const ManagementStudent = () => {
   const [user, setUser] = useState([]);
