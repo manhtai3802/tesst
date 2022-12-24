@@ -1,6 +1,7 @@
-import { Button, Form, Input, Skeleton } from "antd";
+import { Button, Form, Input, Skeleton, DatePicker, Radio, Space } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 import { useParams, useNavigate } from "react-router-dom";
 
 const layout = {
@@ -18,6 +19,7 @@ const tailLayout = {
   },
 };
 const UpdateStudent = () => {
+  const dateFormat = "YYYY/MM/DD";
   const { id } = useParams();
   const [form] = Form.useForm();
   const [user, setUser] = useState();
@@ -28,12 +30,9 @@ const UpdateStudent = () => {
     const response = await axios({
       method: "post",
       url: "http://prod.example.fafu.com.vn/employee",
-      data: values,
+      data: { ...values, id: id },
     });
-  };
-
-  const onReset = () => {
-    form.resetFields();
+    navigate("/");
   };
 
   const getStudentDetail = async () => {
@@ -52,15 +51,16 @@ const UpdateStudent = () => {
     }
   };
 
-  useEffect(() => {
-    getStudentDetail();
-  }, [id]);
-
-  if (loading) return <Skeleton />;
-
   const handleBackPage = () => {
     navigate("/");
   };
+
+  useEffect(() => {
+    getStudentDetail();
+  }, []);
+
+  if (loading) return <Skeleton />;
+
   return (
     <Form
       {...layout}
@@ -109,6 +109,19 @@ const UpdateStudent = () => {
       </Form.Item>
 
       <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          {
+            required: true,
+            message: "Please input your email!",
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
         label="Phone"
         name="phone"
         rules={[
@@ -125,12 +138,43 @@ const UpdateStudent = () => {
         <Input />
       </Form.Item>
 
+      <Form.Item
+        label="Birthday"
+        name="birthday"
+        rules={[
+          {
+            required: true,
+            message: "Please input your birthday!",
+          },
+        ]}
+      >
+        <Space direction="vertical">
+          <DatePicker
+            defaultValue={dayjs(user?.birthday, dateFormat)}
+            format={dateFormat}
+          />
+        </Space>
+      </Form.Item>
+
+      <Form.Item
+        label="Gender "
+        name="gender"
+        rules={[
+          {
+            required: true,
+            message: "Please input your gender!",
+          },
+        ]}
+      >
+        <Radio.Group>
+          <Radio value={0}>Man</Radio>
+          <Radio value={1}>Woman</Radio>
+        </Radio.Group>
+      </Form.Item>
+
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
           Submit
-        </Button>
-        <Button htmlType="button" onClick={onReset}>
-          Reset
         </Button>
         <Button htmlType="button" onClick={handleBackPage}>
           Close

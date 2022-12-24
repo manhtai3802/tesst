@@ -1,4 +1,4 @@
-import { EditOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Popconfirm, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -19,12 +19,12 @@ const ManagementStudent = () => {
 
   const columns = [
     {
-      title: "Tên đăng nhập",
+      title: "User name",
       dataIndex: "username",
       key: "username",
     },
     {
-      title: "Họ và tên",
+      title: "Full name",
       dataIndex: "",
       render: (name) => `${name.firstname} ${name.lastname}`,
       key: "name",
@@ -59,7 +59,7 @@ const ManagementStudent = () => {
             handleDeleteUser(record.id);
           }}
         >
-          <a>Delete</a>
+          <DeleteOutlined />
         </Popconfirm>
       ),
     },
@@ -121,7 +121,6 @@ const ManagementStudent = () => {
   const handleUpdate = (id) => {
     navigate(`user/${id}`);
   };
-
   return (
     <>
       <FormAdd getApi={getApi} user={user} setUser={setUser} />

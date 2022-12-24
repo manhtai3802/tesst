@@ -1,19 +1,18 @@
-import { Button, Form, Input, Modal } from "antd";
+import { Button, DatePicker, Form, Input, Modal, Radio } from "antd";
 import axios from "axios";
 import { useState } from "react";
+import "./AddFormUser.css";
+
 function FormAdd({ getApi }) {
   const [form] = Form.useForm();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    setOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
   const handleCancel = () => {
-    setIsModalOpen(false);
+    setOpen(false);
   };
 
   const onFinish = async (values) => {
@@ -23,6 +22,7 @@ function FormAdd({ getApi }) {
       data: values,
     });
     getApi();
+    handleCancel();
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -32,100 +32,146 @@ function FormAdd({ getApi }) {
   return (
     <>
       <Button type="primary" onClick={showModal}>
-        Open Modal
+        Add Student
       </Button>
       <Modal
-        title="Basic Modal"
-        open={isModalOpen}
-        onOk={handleOk}
+        title="Add student"
+        open={open}
+        onOk={onFinish}
         onCancel={handleCancel}
+        footer={[,]}
       >
-        <div>
-          <div className="modal-content">
-            <Form
-              name="basic"
-              labelCol={{
-                span: 8,
-              }}
-              form={form}
-              wrapperCol={{
-                span: 16,
-              }}
-              initialValues={{
-                remember: true,
-              }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
+        <div className="modal-content">
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            form={form}
+            wrapperCol={{
+              span: 16,
+            }}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="User"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
             >
-              <Form.Item
-                label="User"
-                name="username"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your username!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                label="First Name"
-                name="firstName"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your first name!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+            <Form.Item
+              label="First Name"
+              name="firstname"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your first name!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                label="Last Name"
-                name="lastName"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your last name!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+            <Form.Item
+              label="Last Name"
+              name="lastname"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your last name!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                label="Phone"
-                name="phone"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your phone!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+            <Form.Item
+              label="Phone"
+              name="phone"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your phone!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-              <Form.Item label="Address" name="address">
-                <Input />
-              </Form.Item>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your email!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
 
-              <Form.Item
-                wrapperCol={{
-                  offset: 8,
-                  span: 16,
-                }}
+            <Form.Item label="Address" name="address">
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="Birthday"
+              name="birthday"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your birthday!",
+                },
+              ]}
+            >
+              <DatePicker />
+            </Form.Item>
+
+            <Form.Item
+              label="Gender "
+              name="gender"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your gender!",
+                },
+              ]}
+            >
+              <Radio.Group>
+                <Radio value="0">Man</Radio>
+                <Radio value="1">Woman</Radio>
+              </Radio.Group>
+            </Form.Item>
+
+            <div className="btn-sub">
+              <Button key="back" onClick={handleCancel}>
+                Cancel
+              </Button>
+
+              <Button
+                key="submit"
+                type="primary"
+                htmlType="submit"
+                onClick={onFinish}
+                className="abc"
               >
-                <Button type="primary" htmlType="submit">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
+                Submit
+              </Button>
+            </div>
+          </Form>
         </div>
       </Modal>
     </>
