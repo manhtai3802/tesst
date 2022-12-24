@@ -2,8 +2,9 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, BrowserRouter as Router } from "react-router-dom";
 import FormAdd from "../components/AddFormUser";
+import { Nav } from "react-bootstrap";
 
 const ManagementStudent = () => {
   const [user, setUser] = useState([]);
