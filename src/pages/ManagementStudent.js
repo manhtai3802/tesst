@@ -1,13 +1,13 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Table } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+import { Popconfirm, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate, BrowserRouter as Router } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import FormAdd from "../components/AddFormUser";
-import { Nav } from "react-bootstrap";
 
 const ManagementStudent = () => {
   const [user, setUser] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [tableParams, setTableParams] = useState({
     pagination: {
       current: 1,
@@ -53,13 +53,14 @@ const ManagementStudent = () => {
       key: "5",
       title: "Actions",
       render: (record) => (
-        <>
-          <DeleteOutlined
-            onClick={() => {
-              handleDeleteUser(record.id);
-            }}
-          />
-        </>
+        <Popconfirm
+          title="Sure to delete?"
+          onConfirm={() => {
+            handleDeleteUser(record.id);
+          }}
+        >
+          <a>Delete</a>
+        </Popconfirm>
       ),
     },
     {
@@ -70,7 +71,6 @@ const ManagementStudent = () => {
           <EditOutlined
             onClick={() => {
               handleUpdate(record.id, record);
-              console.log(record);
             }}
           />
         </>
@@ -94,6 +94,7 @@ const ManagementStudent = () => {
             total: response?.data?.total_count,
           },
         });
+        setSearchParams({ page: tableParams.pagination.current });
       }
     } catch (e) {
       console.log("error", e);
@@ -105,6 +106,7 @@ const ManagementStudent = () => {
   }, [tableParams.pagination.current]);
 
   const handleTableChange = (pagination) => {
+    setSearchParams({ page: pagination.current });
     setTableParams({
       pagination,
     });

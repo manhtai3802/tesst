@@ -109,19 +109,6 @@ const UpdateStudent = () => {
       </Form.Item>
 
       <Form.Item
-        label="ID"
-        name="id"
-        rules={[
-          {
-            required: true,
-            message: "Please input your last name!",
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
         label="Phone"
         name="phone"
         rules={[
