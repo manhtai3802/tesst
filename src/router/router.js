@@ -6,11 +6,9 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <ManagementStudent />,
-    children: [
-      {
-        path: "user/:id",
-        element: <UpdateStudent />,
-      },
-    ],
+  },
+  {
+    path: "user/:id",
+    element: <UpdateStudent />,
   },
 ]);

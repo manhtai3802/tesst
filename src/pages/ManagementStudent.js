@@ -68,7 +68,8 @@ const ManagementStudent = () => {
         <>
           <EditOutlined
             onClick={() => {
-              handleUpdate(record.id);
+              handleUpdate(record.id, record);
+              console.log(record);
             }}
           />
         </>
@@ -97,6 +98,7 @@ const ManagementStudent = () => {
       console.log("error", e);
     }
   };
+
   useEffect(() => {
     getApi();
   }, [tableParams.pagination.current]);
@@ -116,6 +118,7 @@ const ManagementStudent = () => {
   const handleUpdate = (id) => {
     navigate(`user/${id}`);
   };
+
   return (
     <>
       <FormAdd getApi={getApi} user={user} setUser={setUser} />

@@ -1,4 +1,8 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Skeleton } from "antd";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+
 const layout = {
   labelCol: {
     span: 8,
@@ -14,17 +18,57 @@ const tailLayout = {
   },
 };
 const UpdateStudent = () => {
+  const { id } = useParams();
   const [form] = Form.useForm();
+  const [user, setUser] = useState();
+  const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
 
-  const onFinish = (values) => {
-    console.log(values);
+  const onFinish = async (values) => {
+    const response = await axios({
+      method: "post",
+      url: "http://prod.example.fafu.com.vn/employee",
+      data: values,
+    });
   };
+
   const onReset = () => {
     form.resetFields();
   };
 
+  const getStudentDetail = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `http://prod.example.fafu.com.vn/employee/${id}`
+      );
+      if (response?.data) {
+        setUser(response?.data);
+      }
+    } catch (e) {
+      console.log("error", e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getStudentDetail();
+  }, [id]);
+
+  if (loading) return <Skeleton />;
+
+  const handleBackPage = () => {
+    navigate("/");
+  };
   return (
-    <Form {...layout} form={form} name="control-hooks" onFinish={onFinish}>
+    <Form
+      {...layout}
+      form={form}
+      name="control-hooks"
+      onFinish={onFinish}
+      initialValues={user}
+    >
       <Form.Item
         label="User"
         name="username"
@@ -40,7 +84,7 @@ const UpdateStudent = () => {
 
       <Form.Item
         label="First Name"
-        name="firstName"
+        name="firstname"
         rules={[
           {
             required: true,
@@ -53,7 +97,7 @@ const UpdateStudent = () => {
 
       <Form.Item
         label="Last Name"
-        name="lastName"
+        name="lastname"
         rules={[
           {
             required: true,
@@ -100,6 +144,9 @@ const UpdateStudent = () => {
         </Button>
         <Button htmlType="button" onClick={onReset}>
           Reset
+        </Button>
+        <Button htmlType="button" onClick={handleBackPage}>
+          Close
         </Button>
       </Form.Item>
     </Form>
