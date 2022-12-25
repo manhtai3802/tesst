@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./AddFormUser.css";
 
-function FormAdd({ getApi }) {
+function FormAdd({ getApi, setTableParams, tableParams }) {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
@@ -16,13 +16,29 @@ function FormAdd({ getApi }) {
   };
 
   const onFinish = async (values) => {
-    const response = await axios({
-      method: "post",
-      url: "http://prod.example.fafu.com.vn/employee",
-      data: values,
-    });
-    getApi();
-    handleCancel();
+    try {
+      const response = await axios({
+        method: "post",
+        url: "http://prod.example.fafu.com.vn/employee",
+        data: values,
+      });
+      if (tableParams.pagination.current === 1) {
+        getApi();
+      }
+
+      localStorage.setItem("currentPage", 1);
+      setTableParams((tableParams) => ({
+        ...tableParams,
+        pagination: {
+          ...tableParams.pagination,
+          current: 1,
+        },
+      }));
+      handleCancel();
+      form.resetFields();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -61,12 +77,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="User"
               name="username"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your username!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your username!",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -74,12 +90,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="First Name"
               name="firstname"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your first name!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your first name!",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -87,12 +103,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="Last Name"
               name="lastname"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your last name!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your last name!",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -100,12 +116,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="Phone"
               name="phone"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your phone!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your phone!",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -113,12 +129,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="Email"
               name="email"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your email!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your email!",
+              //   },
+              // ]}
             >
               <Input />
             </Form.Item>
@@ -130,12 +146,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="Birthday"
               name="birthday"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your birthday!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your birthday!",
+              //   },
+              // ]}
             >
               <DatePicker />
             </Form.Item>
@@ -143,12 +159,12 @@ function FormAdd({ getApi }) {
             <Form.Item
               label="Gender "
               name="gender"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your gender!",
-                },
-              ]}
+              // rules={[
+              //   {
+              //     required: true,
+              //     message: "Please input your gender!",
+              //   },
+              // ]}
             >
               <Radio.Group>
                 <Radio value="0">Man</Radio>

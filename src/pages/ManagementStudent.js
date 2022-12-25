@@ -10,7 +10,7 @@ const ManagementStudent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [tableParams, setTableParams] = useState({
     pagination: {
-      current: 1,
+      current: parseInt(localStorage.getItem("currentPage")) || 1,
       pageSize: 5,
       total: 3,
     },
@@ -110,6 +110,7 @@ const ManagementStudent = () => {
     setTableParams({
       pagination,
     });
+    localStorage.setItem("currentPage", pagination.current);
   };
 
   const handleDeleteUser = async (id) => {
@@ -123,7 +124,11 @@ const ManagementStudent = () => {
   };
   return (
     <>
-      <FormAdd getApi={getApi} user={user} setUser={setUser} />
+      <FormAdd
+        getApi={getApi}
+        setTableParams={setTableParams}
+        tableParams={tableParams}
+      />
       <Table
         columns={columns}
         dataSource={user}
