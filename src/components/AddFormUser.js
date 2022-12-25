@@ -77,12 +77,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="User"
               name="username"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your username!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -90,12 +90,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="First Name"
               name="firstname"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your first name!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your first name!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -103,12 +103,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="Last Name"
               name="lastname"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your last name!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your last name!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -116,12 +116,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="Phone"
               name="phone"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your phone!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your phone!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -129,12 +129,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="Email"
               name="email"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your email!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your email!",
+                },
+              ]}
             >
               <Input />
             </Form.Item>
@@ -146,12 +146,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="Birthday"
               name="birthday"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your birthday!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your birthday!",
+                },
+              ]}
             >
               <DatePicker />
             </Form.Item>
@@ -159,12 +159,12 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
             <Form.Item
               label="Gender "
               name="gender"
-              // rules={[
-              //   {
-              //     required: true,
-              //     message: "Please input your gender!",
-              //   },
-              // ]}
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your gender!",
+                },
+              ]}
             >
               <Radio.Group>
                 <Radio value="0">Man</Radio>
