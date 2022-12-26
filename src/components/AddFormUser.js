@@ -3,7 +3,7 @@ import axios from "axios";
 import { useState } from "react";
 import "./AddFormUser.css";
 
-function FormAdd({ getApi, setTableParams, tableParams }) {
+function FormAdd({ getApi, setSearchParams, tableParams, setTableParams }) {
   const [form] = Form.useForm();
   const [open, setOpen] = useState(false);
 
@@ -26,7 +26,7 @@ function FormAdd({ getApi, setTableParams, tableParams }) {
         getApi();
       }
 
-      localStorage.setItem("currentPage", 1);
+      setSearchParams({ page: 1 });
       setTableParams((tableParams) => ({
         ...tableParams,
         pagination: {

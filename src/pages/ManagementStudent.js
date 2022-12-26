@@ -1,4 +1,4 @@
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm, Table } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ const ManagementStudent = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [tableParams, setTableParams] = useState({
     pagination: {
-      current: parseInt(localStorage.getItem("currentPage")) || 1,
+      current: parseInt(searchParams.get("page")) || 1,
       pageSize: 5,
       total: 3,
     },
@@ -110,7 +110,6 @@ const ManagementStudent = () => {
     setTableParams({
       pagination,
     });
-    localStorage.setItem("currentPage", pagination.current);
   };
 
   const handleDeleteUser = async (id) => {
@@ -128,6 +127,7 @@ const ManagementStudent = () => {
         getApi={getApi}
         setTableParams={setTableParams}
         tableParams={tableParams}
+        setSearchParams={setSearchParams}
       />
       <Table
         columns={columns}
